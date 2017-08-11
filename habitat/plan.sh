@@ -15,11 +15,20 @@ do_build() {
 }
 
 do_install() {
-  scaffolding_go_install
-  local bin="${pkg_prefix}/bin/bookend-scm-github"
-  build_line "Adding wrapper $bin to ${bin}.real"
-  mv -v "$bin" "${bin}.real"
-  cat <<EOF > "${bin}"
+    export VERSION="${pkg_version}"
+    pushd "$scaffolding_go_src_path"
+    make install
+    popd
+    cp -r "${scaffolding_go_gopath:?}/bin" "${pkg_prefix}/${bin}"
+
+    wrap_bin "${pkg_prefix}/bin/bookend-scm-github"
+}
+
+wrap_bin() {
+    local bin="$1"
+    build_line "Adding wrapper $bin to ${bin}.real"
+    mv -v "$bin" "${bin}.real"
+    cat <<EOF > "${bin}"
 #!$(pkg_path_for busybox-static)/bin/sh
 set -e
 if test -n "$DEBUG"; then set -x; fi
@@ -27,5 +36,5 @@ export GIT_PATH="$(pkg_path_for git)/bin/git"
 
 exec ${bin}.real \$@
 EOF
-  chmod -v 755 "${pkg_prefix}/bin/bookend-scm-github"
+    chmod -v 755 "$bin"
 }
