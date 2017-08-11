@@ -4,6 +4,12 @@
 
 ## Usage
 
+### Habitat
+
+```bash
+$ hab pkg exec stjohn/bookend-scm-github bookend-scm-github --help
+```
+
 ### Normal
 ```bash
 GIT_PATH=/usr/bin/git ./bookend-scm-github --host github.com --repo screwdriver-cd/screwdriver --sha 580712fb634ec01ae43246cacf186a8ecdac0d55 --target-dir /tmp/foo

@@ -32,17 +32,15 @@ func executeStreamFail(args ...string) {
 }
 
 func main() {
-
 	args, err := getArguments(os.Args)
-	if err != nil {
-		fmtPrint(redColor(fmt.Sprintf("CLI flags invalid: %v\n", err)))
-		osExit(1)
-		return
-	}
-
 	if args.Version {
 		fmtPrint(VERSION)
 		osExit(0)
+		return
+	}
+	if err != nil {
+		fmtPrint(redColor(fmt.Sprintf("CLI flags invalid: %v\n", err)))
+		osExit(1)
 		return
 	}
 

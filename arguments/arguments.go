@@ -58,10 +58,10 @@ func getFlags(args []string) CommandArgs {
 
 func validateConfig(config CommandArgs) error {
 	if config.Host == "" {
-		return errors.New("--scm-host is required")
+		return errors.New("--host is required")
 	}
 	if config.Repo == "" {
-		return errors.New("--scm-repo is required")
+		return errors.New("--repo is required")
 	}
 	if config.SHA == "" {
 		return errors.New("--sha is required")

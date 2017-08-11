@@ -243,7 +243,7 @@ func TestValidateConfigHost(t *testing.T) {
 	}
 	_, err := GetArguments(osArgs)
 
-	wantErr := "--scm-host is required"
+	wantErr := "--host is required"
 	if err == nil || err.Error() != wantErr {
 		t.Errorf("Received the wrong error: %v, want %v", err, wantErr)
 	}
@@ -258,7 +258,7 @@ func TestValidateConfigRepo(t *testing.T) {
 	}
 	_, err := GetArguments(osArgs)
 
-	wantErr := "--scm-repo is required"
+	wantErr := "--repo is required"
 	if err == nil || err.Error() != wantErr {
 		t.Errorf("Received the wrong error: %v, want %v", err, wantErr)
 	}
